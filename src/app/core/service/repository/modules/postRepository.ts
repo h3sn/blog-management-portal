@@ -14,11 +14,15 @@ export const postRepository = (store: IPostStore): IPostRepository => {
   const path = `${apiPath}/posts`;
   return {
     getList: async () => {
-      const response = await fetch(`${path}`).then<Posts>((response) => response.json());
+      const response = await fetch(`${path}`, {
+        headers,
+      }).then<Posts>((response) => response.json());
       return response;
     },
     getById: async (id: Post['id']) => {
-      const response = await fetch(`${path}/${id}`).then<Post>((response) => response.json());
+      const response = await fetch(`${path}/${id}`, {
+        headers,
+      }).then<Post>((response) => response.json());
       return response;
     },
     register: async (payload: PostRegister) => {

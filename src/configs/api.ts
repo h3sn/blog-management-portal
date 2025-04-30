@@ -1,4 +1,6 @@
+const API_KEY = 'reqres-free-v1';
 export const apiPath = import.meta.env.VITE_API_URL;
 export const headers = {
-  'Content-type': 'application/json; charset=UTF-8',
+  'x-api-key': API_KEY,
+  Accept: 'application/json',
 };

@@ -1,12 +1,24 @@
 // type
 // ------------------------------
+export type List<T> = {
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  data: T[];
+  support: {
+    url: string;
+    text: string;
+  };
+};
 export type Post = {
   id: number;
-  title: string;
-  body: string;
-  userId: number;
+  name: string;
+  year: number;
+  color: string;
+  pantone_value: string;
 };
-export type Posts = Post[];
+export type Posts = List<Post>;
 export type PostRegister = {
   title: string;
   body: string;
