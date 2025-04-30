@@ -1,0 +1,40 @@
+:root {
+  /* ベースカラー */
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-border: #dcdcdc;
+
+  /* テキストカラー */
+  --color-text: #2c2c2c;
+  --color-text-muted: #6b6b6b;
+
+  /* アクセントカラー（落ち着いたブルーグレー系） */
+  --color-primary: #4a5568; /* Slate */
+  --color-primary-hover: #2d3748;
+
+  /* セカンダリカラー（グレイッシュなオリーブ系） */
+  --color-secondary: #6e7b58;
+  --color-secondary-hover: #556040;
+
+  /* ステータスカラー（くすみ系） */
+  --color-success: #4d7c5c;
+  --color-warning: #b08936;
+  --color-danger: #9b4d4d;
+
+  /* ダークモード用（オプション） */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1a1a1a;
+      --color-surface: #2c2c2c;
+      --color-border: #444;
+
+      --color-text: #eaeaea;
+      --color-text-muted: #aaaaaa;
+
+      --color-primary: #a0aec0;
+      --color-primary-hover: #cbd5e0;
+      --color-secondary: #c0cba7;
+      --color-secondary-hover: #dde3c6;
+    }
+  }
+}
