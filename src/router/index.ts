@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Default from '@/app/components/layout/Default.vue';
+import DefaultLayout from '@/app/components/layout/DefaultLayout.vue';
 import Dashboard from '@/app/components/pages/Dashboard.vue';
 import Login from '@/app/components/pages/Login.vue';
 import NotFound from '@/app/components/pages/NotFound.vue';
@@ -11,7 +11,7 @@ import PostRegister from '@/app/components/pages/post/PostRegister.vue';
 const routes = [
   {
     path: '/',
-    component: Default,
+    component: DefaultLayout,
     children: [
       {
         path: '',
@@ -22,7 +22,7 @@ const routes = [
   { path: '/login', component: Login },
   {
     path: '/post',
-    component: Default,
+    component: DefaultLayout,
     children: [
       {
         path: '',
