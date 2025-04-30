@@ -13,10 +13,15 @@ import { ROUTER } from '@/app/core/domain/router';
 const routes = [
   {
     path: '/',
+    redirect: ROUTER.DASHBOARD.PATH,
+  },
+  {
+    path: ROUTER.DASHBOARD.PATH,
     component: DefaultLayout,
     children: [
       {
         path: '',
+        name: ROUTER.DASHBOARD.NAME,
         component: Dashboard,
       },
     ],
