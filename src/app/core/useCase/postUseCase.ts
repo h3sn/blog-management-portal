@@ -6,11 +6,17 @@ import { toastMassage } from '../service/messageService';
 import { postRepository } from '../service/repository';
 import { postStore } from '../service/store';
 // domain
-import type { PostEdit, PostRegister } from '@/app/core/domain/post';
+import type { Post, PostEdit, PostRegister, Posts } from '@/app/core/domain/post';
 
 interface IDependence {
   repository: IPostRepository;
   message: IMassageService;
+}
+
+export interface IPostUseCase {
+  getPostList: (dependence?: IDependence) => Promise<Posts | undefined>;
+  registerPost: (payload: PostRegister, dependence?: IDependence) => Promise<Post | undefined>;
+  editPost: (payload: PostEdit, dependence?: IDependence) => Promise<Post | undefined>;
 }
 
 /**
@@ -18,7 +24,7 @@ interface IDependence {
  * @param {IDependence} dependence
  * @returns {Promise<Posts | undefined>} Promise<Posts | undefined>
  */
-export const getPostList = async (
+export const getPostList: IPostUseCase['getPostList'] = async (
   dependence: IDependence = {
     repository: postRepository(postStore),
     message: toastMassage,
@@ -37,7 +43,7 @@ export const getPostList = async (
  * @param {IDependence} dependence
  * @returns {Promise<Post | undefined>} Promise<Post | undefined>
  */
-export const registerPost = async (
+export const registerPost: IPostUseCase['registerPost'] = async (
   payload: PostRegister,
   dependence: IDependence = {
     repository: postRepository(postStore),
@@ -57,7 +63,7 @@ export const registerPost = async (
  * @param {IDependence} dependence
  * @returns {Promise<Post | undefined>} Promise<Post | undefined>
  */
-export const editPost = async (
+export const editPost: IPostUseCase['editPost'] = async (
   payload: PostEdit,
   dependence: IDependence = {
     repository: postRepository(postStore),
