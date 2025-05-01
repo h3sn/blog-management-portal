@@ -5,7 +5,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="closeDialog">Cancel</el-button>
-        <el-button type="primary" @click="handleSubmit"> {{ label }}する </el-button>
+        <el-button type="primary" :loading="loading" @click="handleSubmit"> {{ label }}する </el-button>
       </div>
     </template>
   </el-dialog>
@@ -18,10 +18,12 @@
 // ------------------------------
 const {
   label = '',
+  loading = false,
   handleSubmit = () => {},
   handleConfirm = () => {},
 } = defineProps<{
   label: string;
+  loading: boolean;
   handleSubmit: () => void;
   handleConfirm: () => void;
 }>();
