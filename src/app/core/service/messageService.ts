@@ -1,3 +1,6 @@
+// library
+import { ElMessage } from 'element-plus';
+// interface
 import type { IMassageService } from '@/app/core/useCase/interface/modules/serviceInterface';
 
 /**
@@ -9,13 +12,22 @@ export const toastMassage: IMassageService = {
    * @param {string} message
    */
   success(message: string) {
-    console.log(message);
+    ElMessage({
+      message,
+      type: 'success',
+      plain: true,
+    });
   },
+
   /**
    * 失敗時メッセージ
    * @param {string} message
    */
   failure(message: string) {
-    console.log(message);
+    ElMessage({
+      message,
+      type: 'error',
+      plain: true,
+    });
   },
 };
