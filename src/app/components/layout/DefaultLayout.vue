@@ -18,6 +18,11 @@
 .el-aside {
   border-right: 1px solid var(--color-primary);
 }
+.el-main {
+  > *:not(last-child) {
+    margin-bottom: 30px;
+  }
+}
 .el-footer {
   border-top: 1px solid var(--color-primary);
 }
