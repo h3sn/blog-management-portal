@@ -25,3 +25,13 @@ export type PostRegister = {
   userId: number;
 };
 export type PostEdit = Post;
+
+// メソッド
+// ------------------------------
+export const createPostRegisterData = (userId: PostRegister['userId']): PostRegister => {
+  return {
+    title: '',
+    body: '',
+    userId,
+  };
+};

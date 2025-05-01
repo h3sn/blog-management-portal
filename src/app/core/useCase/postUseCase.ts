@@ -1,16 +1,19 @@
 // interface
 import type { IPostRepository } from './interface/modules/repositoryInterface';
-import type { IMassageService } from './interface/modules/serviceInterface';
+import type { IMassageService, IRouterService } from './interface/modules/serviceInterface';
 // service
 import { toastMassage } from '../service/messageService';
 import { postRepository } from '../service/repository';
+import { router } from '../service/routerService';
 import { postStore } from '../service/store';
 // domain
 import type { Post, PostEdit, PostRegister, Posts } from '@/app/core/domain/post';
+import { ROUTER } from '@/app/core/domain/router';
 
 interface IDependence {
   repository: IPostRepository;
   message: IMassageService;
+  router?: IRouterService;
 }
 
 export interface IPostUseCase {
@@ -48,10 +51,14 @@ export const registerPost: IPostUseCase['registerPost'] = async (
   dependence: IDependence = {
     repository: postRepository(postStore),
     message: toastMassage,
+    router: router,
   }
 ) => {
   try {
+    // throw new Error('test');
     const response = await dependence.repository.register(payload);
+    dependence.message.success('保存しました。');
+    dependence.router?.push(ROUTER.POST.LIST.PATH);
     return response;
   } catch (error) {
     dependence.message.failure((error as Error).message);
@@ -68,10 +75,12 @@ export const editPost: IPostUseCase['editPost'] = async (
   dependence: IDependence = {
     repository: postRepository(postStore),
     message: toastMassage,
+    router: router,
   }
 ) => {
   try {
     const response = await dependence.repository.edit(payload);
+    dependence.router?.push(ROUTER.POST.LIST.PATH);
     return response;
   } catch (error) {
     dependence.message.failure((error as Error).message);

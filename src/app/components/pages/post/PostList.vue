@@ -1,5 +1,6 @@
 <template>
   <div>PostList</div>
+  <router-link :to="{ path: ROUTER.POST.REGISTER.PATH }"><el-button>新規投稿</el-button></router-link>
   <el-table :data="posts">
     <el-table-column prop="id" label="Id" width="80" />
     <el-table-column prop="name" label="Name" width="180" />
@@ -24,6 +25,8 @@
 <script lang="ts" setup>
 // controller
 import { useGetPostListController } from '@/app/components/pages/post/PostController';
+// domain
+import { ROUTER } from '@/app/core/domain/router';
 
 // 投稿一覧を取得する
 // ------------------------------
