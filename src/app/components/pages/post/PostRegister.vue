@@ -1,16 +1,22 @@
 <template>
   <div>PostRegister</div>
-  <el-form :model="form" label-width="auto">
-    <el-form-item label="タイトル">
+  <el-form ref="ruleFormRef" :model="form" :rules="rules" label-width="auto">
+    <el-form-item label="タイトル" prop="title">
       <el-input v-model="form.title" />
     </el-form-item>
-    <el-form-item label="本文">
+    <el-form-item label="本文" prop="body">
       <el-input v-model="form.body" type="textarea" />
     </el-form-item>
     <el-form-item>
       <el-row :gutter="10">
         <el-col :span="11">
-          <confirm-dialog v-model:isOpen="isOn" label="保存" :handleSubmit="handleSubmit" :handleConfirm="handleConfirm"></confirm-dialog>
+          <confirm-dialog
+            v-model:isOpen="isOn"
+            label="保存"
+            :loading="loading"
+            :handleSubmit="handleSubmit"
+            :handleConfirm="handleConfirm"
+          ></confirm-dialog>
         </el-col>
         <el-col :span="13">
           <el-button @click="cancel">Cancel</el-button>
@@ -24,6 +30,7 @@
 
 <script lang="ts" setup>
 // library
+import type { FormInstance, FormRules } from 'element-plus';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 // composable
@@ -41,6 +48,14 @@ import ConfirmDialog from '@/app/components/parts/ConfirmDialog.vue';
 // ------------------------------
 const router = useRouter();
 
+// rules
+// ------------------------------
+const ruleFormRef = ref<FormInstance>();
+const rules = ref<FormRules<PostRegister>>({
+  title: [{ required: true, message: 'Please input title', trigger: 'blur' }],
+  body: [{ required: true, message: 'Please input body', trigger: 'blur' }],
+});
+
 // form data
 // ------------------------------
 const userId = 1;
@@ -49,16 +64,23 @@ const form = ref<PostRegister>(createPostRegisterData(userId));
 // 登録確認
 // ------------------------------
 const { on, off, isOn } = useSwitch();
-const handleConfirm = () => {
-  // TODO: validation
-  on();
+const handleConfirm = async () => {
+  if (!ruleFormRef.value) return;
+  await ruleFormRef.value.validate((valid) => {
+    if (valid) {
+      on();
+    }
+  });
 };
 
 // 登録
 // ------------------------------
 const { registerPostController } = useRegisterPostController();
-const handleSubmit = () => {
-  registerPostController(form.value);
+const loading = ref(false);
+const handleSubmit = async () => {
+  loading.value = true;
+  await registerPostController(form.value);
+  loading.value = false;
   off();
 };
 
