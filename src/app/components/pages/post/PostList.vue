@@ -1,6 +1,9 @@
 <template>
-  <div>PostList</div>
-  <router-link :to="{ path: ROUTER.POST.REGISTER.PATH }"><el-button>新規投稿</el-button></router-link>
+  <header class="main-header">
+    <!-- TODO: コンポーネント化する -->
+    <div class="main-header__title">PostList</div>
+    <router-link :to="{ path: ROUTER.POST.REGISTER.PATH }"><el-button>新規投稿</el-button></router-link>
+  </header>
   <el-table :data="posts">
     <el-table-column prop="id" label="Id" width="80" />
     <el-table-column prop="name" label="Name" width="180" />
@@ -16,6 +19,12 @@
 .color-dot {
   width: 10px;
   height: 10px;
+}
+.main-header {
+  margin-bottom: 30px;
+  &__title {
+    margin-bottom: 10px;
+  }
 }
 </style>
 
