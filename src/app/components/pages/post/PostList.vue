@@ -6,11 +6,8 @@
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column label="color">
       <template #default="scope"
-        ><el-row :gutter="10" align="middle"
-          ><el-col :span="4"><div class="color-dot" :style="`background-color: ${scope.row.color}`"></div></el-col>
-          <el-col :span="20">{{ scope.row.color }}</el-col>
-        </el-row></template
-      >
+        ><el-tag :color="scope.row.color" effect="dark" type="info">{{ scope.row.color }}</el-tag>
+      </template>
     </el-table-column>
   </el-table>
 </template>
