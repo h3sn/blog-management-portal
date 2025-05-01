@@ -9,7 +9,7 @@ export interface IMassageService {
 /**
  * ルーティング
  */
-export interface Router {
+export interface IRouterService {
   push: (path: string) => void;
   replace: (path: string) => void;
 }
